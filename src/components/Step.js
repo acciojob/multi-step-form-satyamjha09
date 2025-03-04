@@ -1,7 +1,8 @@
 import React from 'react';
+
 const Step = ({ step, formData, handleChange, nextStep, prevStep, handleSubmit }) => {
   return (
-    <div>
+    <div id={`step${step}`}> {/* Add unique ID for each step */}
       {step === 1 && (
         <div>
           <h2>Step 1: User Information</h2>
@@ -67,5 +68,6 @@ const Step = ({ step, formData, handleChange, nextStep, prevStep, handleSubmit }
     </div>
   );
 };
+
 
 export default Step;
