@@ -1,102 +1,68 @@
 import React from 'react';
-
-const Step = ({ currentStep, formData, handleChange, onNext, onPrev, onSubmit  }) => {
-
-  const renderInputs = () => {
-    switch (currentStep) {
-      case 1:
-        return (
-          <>
-            <div>
-              <label htmlFor="first_name">First Name</label>
-              <input
-                type="text"
-                id="first_name"
-                value={formData.first_name || ''}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="last_name">Last Name</label>
-              <input
-                type="text"
-                id="last_name"
-                value={formData.last_name || ''}
-                onChange={handleChange}
-              />
-            </div>
-          </>
-        );
-      case 2:
-        return (
-          <>
-            <div>
-              <label htmlFor="model">Car Model</label>
-              <input
-                type="text"
-                id="model"
-                value={formData.model || ''}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="car_price">Car Price</label>
-              <input
-                type="number"
-                id="car_price"
-                value={formData.car_price || ''}
-                onChange={handleChange}
-              />
-            </div>
-          </>
-        );
-      case 3:
-        return (
-          <>
-            <div>
-              <label htmlFor="card_info">Card Information</label>
-              <input
-                type="text"
-                id="card_info"
-                value={formData.card_info || ''}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="expiry_date">Expiry Date</label>
-              <input
-                type="month"
-                id="expiry_date"
-                value={formData.expiry_date || ''}
-                onChange={handleChange}
-              />
-            </div>
-          </>
-        );
-      default:
-        return null;
-    }
-  };
-
+const Step = ({ step, formData, handleChange, nextStep, prevStep, handleSubmit }) => {
   return (
-    <div className="step-form">
-      <div className="step-header">Step {currentStep}</div>
-      <div className="form-inputs">{renderInputs()}</div>
-      <div className="form-actions">
-        {currentStep !== 1 && (
-          <button type="button" onClick={onPrev}>
-            Previous
-          </button>
-        )}
-        {currentStep !== 3 ? (
-          <button type="button" onClick={onNext}>
-            Next
-          </button>
-        ) : (
-          <button type="button" onClick={onSubmit}>
-            Submit
-          </button>
-        )}
+    <div>
+      {step === 1 && (
+        <div>
+          <h2>Step 1: User Information</h2>
+          <input
+            type="text"
+            id="first_name"
+            placeholder="First Name"
+            value={formData.first_name}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            id="last_name"
+            placeholder="Last Name"
+            value={formData.last_name}
+            onChange={handleChange}
+          />
+        </div>
+      )}
+      {step === 2 && (
+        <div>
+          <h2>Step 2: Car Details</h2>
+          <input
+            type="text"
+            id="model"
+            placeholder="Car Model"
+            value={formData.model}
+            onChange={handleChange}
+          />
+          <input
+            type="number"
+            id="car_price"
+            placeholder="Car Price"
+            value={formData.car_price}
+            onChange={handleChange}
+          />
+        </div>
+      )}
+      {step === 3 && (
+        <div>
+          <h2>Step 3: Payment Details</h2>
+          <input
+            type="text"
+            id="card_info"
+            placeholder="Card Information"
+            value={formData.card_info}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            id="expiry_date"
+            placeholder="Expiry Date"
+            value={formData.expiry_date}
+            onChange={handleChange}
+          />
+        </div>
+      )}
+      <div>
+        {step > 1 && <button onClick={prevStep}>Previous</button>}
+        {step < 3 && <button onClick={nextStep}>Next</button>}
+        {step === 3 && <button onClick={handleSubmit}>Submit</button>}
       </div>
     </div>
   );

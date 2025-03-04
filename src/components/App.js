@@ -1,49 +1,37 @@
 import React, { useState } from 'react'; 
 import Step from './Step';
-
-function App() {
-
-
-  const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState({});
-
-  const nextStep = () => {
-    if (currentStep < 3) {
-      setCurrentStep(currentStep + 1);
-    }
-  };
-
-  const prevStep = () => {
-    if (currentStep > 1) {
-      setCurrentStep(currentStep - 1);
-    }
-  };
+const App = () => {
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
+    model: "",
+    car_price: "",
+    card_info: "",
+    expiry_date: "",
+  });
 
   const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [id]: value
-    }));
+    setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-  const handleSubmit = () => {
-    console.log('Form submitted:', formData);
-    // Add your form submission logic here
-  };
+  const nextStep = () => setStep(step + 1);
+  const prevStep = () => setStep(step - 1);
+  const handleSubmit = () => alert("Form submitted successfully!");
 
   return (
-    <div className="App">
+    <div>
+      <h1>Multi-Step Form</h1>
       <Step
-        currentStep={currentStep}
+        step={step}
         formData={formData}
         handleChange={handleChange}
-        onNext={nextStep}
-        onPrev={prevStep}
-        onSubmit={handleSubmit}
+        nextStep={nextStep}
+        prevStep={prevStep}
+        handleSubmit={handleSubmit}
       />
     </div>
   );
-}
+};
 
 export default App;
