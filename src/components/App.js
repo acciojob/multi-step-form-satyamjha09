@@ -1,10 +1,7 @@
-
 import React, { useState } from "react";
-import './../styles/App.css';
 import Step from "./Step";
 
-const App = () => {
-
+const MultiStepForm = () => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     first_name: "",
@@ -15,29 +12,19 @@ const App = () => {
     expiry_date: "",
   });
 
-  const handleChange = (e) => {
-    setFormData({ ...formData , [e.target.id]: e.target.value });
-  };
-
   const nextStep = () => setStep((prev) => prev + 1);
-  const prevStep = () => setStep((prev) => prev -1);
-
-  const handleSubmit = () => {
-    console.log("Form Submitted", formData);
-  }
+  const prevStep = () => setStep((prev) => prev - 1);
 
   return (
     <div>
-        <Step
-        step={step}
-        formData={formData}
-        handleChange={handleChange}
-        nextStep={nextStep}
-        prevStep={prevStep}
-        handleSubmit={handleSubmit}
-      />
+      {step === 1 && <Step step={1} formData={formData} setFormData={setFormData} />}
+      {step === 2 && <Step step={2} formData={formData} setFormData={setFormData} />}
+      {step === 3 && <Step step={3} formData={formData} setFormData={setFormData} />}
+      
+      {step > 1 && <button onClick={prevStep}>Previous</button>}
+      {step < 3 ? <button onClick={nextStep}>Next</button> : <button type="submit">Submit</button>}
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default MultiStepForm;

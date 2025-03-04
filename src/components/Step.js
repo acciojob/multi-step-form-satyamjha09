@@ -1,78 +1,34 @@
-import React from 'react'
+import React from "react";
 
-const Step = ({ step, formData, handleChange, nextStep, prevStep, handleSubmit }) => {
+const Step = ({ step, formData, setFormData }) => {
   return (
-    <div className="p-4 border rounded-md shadow-md max-w-md mx-auto">
-    {step === 1 && (
-      <div>
-        <h2 className="text-xl font-bold mb-4">Step 1: Personal Info</h2>
-        <input
-          id="first_name"
-          type="text"
-          placeholder="First Name"
-          value={formData.first_name}
-          onChange={handleChange}
-          className="w-full p-2 mb-2 border rounded"
-        />
-        <input
-          id="last_name"
-          type="text"
-          placeholder="Last Name"
-          value={formData.last_name}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-        />
-      </div>
-    )}
-    {step === 2 && (
-      <div>
-        <h2 className="text-xl font-bold mb-4">Step 2: Car Details</h2>
-        <input
-          id="model"
-          type="text"
-          placeholder="Car Model"
-          value={formData.model}
-          onChange={handleChange}
-          className="w-full p-2 mb-2 border rounded"
-        />
-        <input
-          id="car_price"
-          type="number"
-          placeholder="Car Price"
-          value={formData.car_price}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-        />
-      </div>
-    )}
-    {step === 3 && (
-      <div>
-        <h2 className="text-xl font-bold mb-4">Step 3: Payment Info</h2>
-        <input
-          id="card_info"
-          type="text"
-          placeholder="Card Information"
-          value={formData.card_info}
-          onChange={handleChange}
-          className="w-full p-2 mb-2 border rounded"
-        />
-        <input
-          id="expiry_date"
-          type="text"
-          placeholder="Expiry Date"
-          value={formData.expiry_date}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-        />
-      </div>
-    )}
-    <div className="flex justify-between mt-4">
-      {step > 1 && <button onClick={prevStep} className="p-2 bg-gray-300 rounded">Previous</button>}
-      {step < 3 && <button onClick={nextStep} className="p-2 bg-blue-500 text-white rounded">Next</button>}
-      {step === 3 && <button onClick={handleSubmit} className="p-2 bg-green-500 text-white rounded">Submit</button>}
+    <div id={`step${step}`}>
+      {step === 1 && (
+        <>
+          <label>First Name:</label>
+          <input id="first_name" value={formData.first_name} onChange={(e) => setFormData({ ...formData, first_name: e.target.value })} />
+          <label>Last Name:</label>
+          <input id="last_name" value={formData.last_name} onChange={(e) => setFormData({ ...formData, last_name: e.target.value })} />
+        </>
+      )}
+      {step === 2 && (
+        <>
+          <label>Car Model:</label>
+          <input id="model" value={formData.model} onChange={(e) => setFormData({ ...formData, model: e.target.value })} />
+          <label>Car Price:</label>
+          <input id="car_price" value={formData.car_price} onChange={(e) => setFormData({ ...formData, car_price: e.target.value })} />
+        </>
+      )}
+      {step === 3 && (
+        <>
+          <label>Card Info:</label>
+          <input id="card_info" value={formData.card_info} onChange={(e) => setFormData({ ...formData, card_info: e.target.value })} />
+          <label>Expiry Date:</label>
+          <input id="expiry_date" value={formData.expiry_date} onChange={(e) => setFormData({ ...formData, expiry_date: e.target.value })} />
+        </>
+      )}
     </div>
-  </div>
-  )
-}
+  );
+};
 
-export default Step
+export default Step;
