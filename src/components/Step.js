@@ -1,32 +1,102 @@
-import React from "react";
+import React from 'react';
 
-const Step = ({ step, formData, setFormData }) => {
+const Step = ({ currentStep, formData, handleChange, onNext, onPrev, onSubmit }) => {
+  const renderInputs = () => {
+    switch (currentStep) {
+      case 1:
+        return (
+          <>
+            <div>
+              <label htmlFor="first_name">First Name</label>
+              <input
+                type="text"
+                id="first_name"
+                value={formData.first_name || ''}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="last_name">Last Name</label>
+              <input
+                type="text"
+                id="last_name"
+                value={formData.last_name || ''}
+                onChange={handleChange}
+              />
+            </div>
+          </>
+        );
+      case 2:
+        return (
+          <>
+            <div>
+              <label htmlFor="model">Car Model</label>
+              <input
+                type="text"
+                id="model"
+                value={formData.model || ''}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="car_price">Car Price</label>
+              <input
+                type="number"
+                id="car_price"
+                value={formData.car_price || ''}
+                onChange={handleChange}
+              />
+            </div>
+          </>
+        );
+      case 3:
+        return (
+          <>
+            <div>
+              <label htmlFor="card_info">Card Information</label>
+              <input
+                type="text"
+                id="card_info"
+                value={formData.card_info || ''}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="expiry_date">Expiry Date</label>
+              <input
+                type="month"
+                id="expiry_date"
+                value={formData.expiry_date || ''}
+                onChange={handleChange}
+              />
+            </div>
+          </>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div id={`step${step}`}>
-      {step === 1 && (
-        <>
-          <label>First Name:</label>
-          <input id="first_name" value={formData.first_name} onChange={(e) => setFormData({ ...formData, first_name: e.target.value })} />
-          <label>Last Name:</label>
-          <input id="last_name" value={formData.last_name} onChange={(e) => setFormData({ ...formData, last_name: e.target.value })} />
-        </>
-      )}
-      {step === 2 && (
-        <>
-          <label>Car Model:</label>
-          <input id="model" value={formData.model} onChange={(e) => setFormData({ ...formData, model: e.target.value })} />
-          <label>Car Price:</label>
-          <input id="car_price" value={formData.car_price} onChange={(e) => setFormData({ ...formData, car_price: e.target.value })} />
-        </>
-      )}
-      {step === 3 && (
-        <>
-          <label>Card Info:</label>
-          <input id="card_info" value={formData.card_info} onChange={(e) => setFormData({ ...formData, card_info: e.target.value })} />
-          <label>Expiry Date:</label>
-          <input id="expiry_date" value={formData.expiry_date} onChange={(e) => setFormData({ ...formData, expiry_date: e.target.value })} />
-        </>
-      )}
+    <div className="step-form">
+      <div className="step-header">Step {currentStep}</div>
+      <div className="form-inputs">{renderInputs()}</div>
+      <div className="form-actions">
+        {currentStep !== 1 && (
+          <button type="button" onClick={onPrev}>
+            Previous
+          </button>
+        )}
+        {currentStep !== 3 ? (
+          <button type="button" onClick={onNext}>
+            Next
+          </button>
+        ) : (
+          <button type="button" onClick={onSubmit}>
+            Submit
+          </button>
+        )}
+      </div>
     </div>
   );
 };
