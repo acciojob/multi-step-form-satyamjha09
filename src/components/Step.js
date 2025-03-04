@@ -1,6 +1,7 @@
 import React from 'react';
 
-const Step = ({ currentStep, formData, handleChange, onNext, onPrev, onSubmit }) => {
+const Step = ({ currentStep, formData, handleChange, onNext, onPrev, onSubmit  }) => {
+
   const renderInputs = () => {
     switch (currentStep) {
       case 1:

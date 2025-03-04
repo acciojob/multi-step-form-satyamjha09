@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import React, { useState } from 'react'; 
 import Step from './Step';
 
 function App() {
+
+
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({});
 
