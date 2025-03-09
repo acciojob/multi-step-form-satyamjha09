@@ -15,8 +15,9 @@ const MultiStepForm = () => {
         setFormData({ ...formData, [e.target.id]: e.target.value });
       };
     
-    const nextStep = () => setStep(step + 1);
-    const prevStep = () => setStep(step - 1);
+      const nextStep = () => setStep((prev) => prev + 1);
+      const prevStep = () => setStep((prev) => prev - 1);
+      
 
 
   return (
